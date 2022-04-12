@@ -1,2 +1,3 @@
-# social_network_analysis
- Project at Unilu
+# Social Network Analysis Project
+ Project at University Luzern 
+ Authors: Julien Lattmann, Tobias Hoesli
