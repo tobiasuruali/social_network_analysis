@@ -22,14 +22,12 @@ set.vertex.attribute(transfer_net, "league", c(
     "ChL", "ChL", "ChL", "ChL", "ChL"
 ))
 
-# Knoten-Attribut "balace" definieren: Kategorien von 1-4
-# repräsentieren verschiedene Kategorien des Kontostands
-# set.vertex.attribute(transfer_net, "balance", c("1", "3", "3", "2", "4",
-# "4", "1", "1", "2", "1",
-# "2", "1", "1", "2", "2"))
+#Kanten-Attribut "spendings" definieren: Transfersumme in Tsd.
+spendings <- read.csv("/Users/julienlattmann/Desktop/Spendings.csv", sep = ";")
+set.edge.attribute(transfer_net, "spendings", spendings)
+
 # Knoten-Attribut "alledg" definieren (abgekürzte Variante)
 transfer_net %v% "alldeg" <- degree(transfer_net)
-
 
 # Beziehungsart der Kanten definieren
 # relation <- c(rep("family", 3), rep("friends", 5), rep("colleague", 3), rep("friends", 4))
@@ -46,6 +44,10 @@ gplot(transfer_net, vertex.col = c("steelblue", "burlywood1"), displaylabels = T
 par(mfrow=c(1,2))
 gplot(transfer_net, vertex.col = c("steelblue", "burlywood1"), displaylabels = TRUE, edge.col = "darkgrey", edge.lwd = 0.5, mode = "kamadakawai")
 gplot(transfer_net, vertex.col = c("steelblue", "burlywood1"), displaylabels = TRUE, edge.col = "darkgrey", edge.lwd = 0.5, mode = "random")
+
+par(mfrow=c(1,1))
+gplot(transfer_net, vertex.col = c("steelblue", "burlywood1"), displaylabels = TRUE, edge.col = "darkgrey", edge.lwd = transfer_net %v% "spendings"*0.05)
+
 
 # my_pal <- brewer.pal(3, "Set1")
 # league <- as.factor(get.vertex.attribute(transfer_net, "league"))
