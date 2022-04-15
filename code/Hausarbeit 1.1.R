@@ -37,10 +37,19 @@ transfer_net %v% "alldeg" <- degree(transfer_net)
 # set.edge.attribute(transfer_net, "relation", relation)
 
 summary(transfer_net)
+
+# Visualisierung
+par(mfrow=c(1,2))
 gplot(transfer_net, vertex.col = c("steelblue", "burlywood1"), displaylabels = TRUE, edge.col = "darkgrey", edge.lwd = 0.5)
-my_pal <- brewer.pal(3, "Set1")
-league <- as.factor(get.vertex.attribute(transfer_net, "league"))
-plot(transfer_net, usearrows = FALSE, vertex.cex = 2.5, vertex.col = my_pal[league], displaylabels = T, edge.col = "darkgrey")
+gplot(transfer_net, vertex.col = c("steelblue", "burlywood1"), displaylabels = TRUE, edge.col = "darkgrey", edge.lwd = 0.5, mode = "circle")
+
+par(mfrow=c(1,2))
+gplot(transfer_net, vertex.col = c("steelblue", "burlywood1"), displaylabels = TRUE, edge.col = "darkgrey", edge.lwd = 0.5, mode = "kamadakawai")
+gplot(transfer_net, vertex.col = c("steelblue", "burlywood1"), displaylabels = TRUE, edge.col = "darkgrey", edge.lwd = 0.5, mode = "random")
+
+# my_pal <- brewer.pal(3, "Set1")
+# league <- as.factor(get.vertex.attribute(transfer_net, "league"))
+# plot(transfer_net, usearrows = FALSE, vertex.cex = 2.5, vertex.col = my_pal[league], displaylabels = T, edge.col = "darkgrey")
 
 
 
