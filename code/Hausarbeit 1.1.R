@@ -46,7 +46,7 @@ gplot(transfer_net, vertex.col = c("steelblue", "burlywood1"), displaylabels = T
 gplot(transfer_net, vertex.col = c("steelblue", "burlywood1"), displaylabels = TRUE, edge.col = "darkgrey", edge.lwd = 0.5, mode = "random")
 
 par(mfrow=c(1,1))
-gplot(transfer_net, vertex.col = c("steelblue", "burlywood1"), displaylabels = TRUE, edge.col = "darkgrey", edge.lwd = transfer_net %v% "spendings"*0.05)
+gplot(transfer_net, vertex.col = c("steelblue", "burlywood1"), displaylabels = TRUE, edge.col = "darkgrey", edge.lwd = transfer_net %e% "spendings"*0.05)
 
 
 # my_pal <- brewer.pal(3, "Set1")
