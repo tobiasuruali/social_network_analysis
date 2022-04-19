@@ -23,7 +23,7 @@ set.vertex.attribute(transfer_net, "league", c(
 ))
 
 #Kanten-Attribut "spendings" definieren: Transfersumme in Tsd.
-spendings <- read.csv("/Users/julienlattmann/Desktop/Spendings.csv", sep = ";")
+spendings <- read.csv("code/data/Spendings.csv", sep = ";")
 set.edge.attribute(transfer_net, "spendings", spendings)
 
 # Knoten-Attribut "alledg" definieren (abgekürzte Variante)
