@@ -1,32 +1,14 @@
----
-title: "Heimarbeit 2"
-author: "Julien Lattmann, Tobias Hoesli"
-date: '2022-04-13'
-output:
-  html_document:
-    df_print: paged
-  pdf_document: default
-bibliography: citation.bib
----
-
-```{r setup, include=FALSE}
+## ----setup, include=FALSE---------------------------------------------------------------------------------------------
 knitr::opts_chunk$set(echo = TRUE)
-```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>. Test
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r set up of packages, include=FALSE}
+## ----set up of packages, include=FALSE--------------------------------------------------------------------------------
 # install.packages("statnet")
 library("RColorBrewer")
 library("statnet")
-```
 
 
-```{r set up of edge list }
+## ----set up of edge list----------------------------------------------------------------------------------------------
 edge_list <- read.csv("data/Edge_List_Values.csv", sep = ";")
 
 # Ertsellen der Kanten-Liste aufgrund der gesammelten Daten
@@ -57,13 +39,9 @@ transfer_net %v% "alldeg" <- degree(transfer_net)
 summary(transfer_net)
 
 
-```
 
-## Including Plots
 
-You can also embed plots, for example:
-
-```{r first few plots, echo=TRUE}
+## ----first few plots, echo=TRUE---------------------------------------------------------------------------------------
 par(mar= c(0,0,4,0),mfrow=c(2,2))
 gplot(transfer_net, vertex.col = c("steelblue", "burlywood1"), displaylabels = TRUE, label.cex = 0.75, edge.col = "lightgreen", edge.lwd = 0.5, mode = "circle")
 gplot(transfer_net, vertex.col = c("steelblue", "burlywood1"), displaylabels = TRUE, label.cex = 0.75, edge.col = "darkgrey", edge.lwd = 0.5, mode = "kamadakawai")
@@ -73,19 +51,17 @@ gplot(transfer_net, vertex.col = c("steelblue", "burlywood1"), displaylabels = T
 
 par(mfrow=c(1,1))
 gplot(transfer_net, vertex.col = c("steelblue", "burlywood1"), displaylabels = TRUE, edge.col = "darkgrey", edge.lwd = transfer_net %e% "spendings"*0.05)
-```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
-```{r include spendings as quantitatives Knotenattribut }
+## ----include spendings as quantitatives Knotenattribut----------------------------------------------------------------
 
 par(mfrow=c(1,1))
 gplot(transfer_net, vertex.col = c("steelblue", "burlywood1"), displaylabels = TRUE, edge.col = "darkgrey", edge.lwd = transfer_net %e% "spendings"*0.05)
 
 
-```
 
-```{r compute betweenness}
+
+## ----compute betweenness----------------------------------------------------------------------------------------------
 
 
 bet <-betweenness(transfer_net, gmode = "graph")
@@ -93,10 +69,9 @@ bet <-betweenness(transfer_net, gmode = "graph")
 
 
 
-```
 
 
-```{r Knotengrösse Anpassen gemäss betweenness}
+## ----Knotengrösse Anpassen gemäss betweenness-------------------------------------------------------------------------
 
 par(mar=c(0,0,0,0), mfrow=c(1,1))
 gplot(transfer_net, vertex.col = c("steelblue", "burlywood1"),
@@ -106,17 +81,11 @@ gplot(transfer_net, vertex.col = c("steelblue", "burlywood1"),
 
 
 
-```
-
-Test if I can convert Rmd to R file with Knitr
 
 
-```{r convert markdown to R Script}
-
-#knitr::purl("Heimarbeit2.rmd")
+## ---------------------------------------------------------------------------------------------------------------------
 
 
-```
 
- 
+
 
