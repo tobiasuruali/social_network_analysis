@@ -1,0 +1,161 @@
+---
+title: "Heimarbeit3"
+author: "Julien Lattmann, Tobias Hoesli"
+date: '2022-04-21'
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r setup packages}
+#install.packages("igraph")
+#detach(package:statnet)
+library(intergraph)
+library(network)
+library(igraph)
+library(RColorBrewer)
+
+
+```
+
+## R Markdown
+
+```{r}
+edge_list <- read.csv("data/Edge_List_iGraph.csv", sep = ";")
+
+# Ertsellen der Kanten-Liste aufgrund der gesammelten Daten
+df <- edge_list
+
+#Kanten-Attribut "spendings" definieren: Transfersumme in Tsd.
+spendings <- read.csv("data/Spendings.csv", sep = ";")
+
+
+#Kanten-Attribut "type" definieren: Spieler-Transaktionstyp (Ablöse, Leihe, unbekannt)
+type <- read.csv("data/Type_ID.csv", sep = ";")
+
+summary(spendings)
+df$spendings <- spendings
+
+summary(df)
+
+```
+
+
+## Including Plots
+
+
+
+
+```{r}
+
+
+transfer_igraph <- graph.data.frame(d = df, directed=TRUE)
+summary(transfer_igraph)
+
+
+
+V(transfer_igraph)$name <-   c(
+    "YB",
+    "BAS",
+    "SFC",
+    "LUG",
+    "LUZ",
+    "LS",
+    "SG",
+    "FCZ",
+    "SION",
+    "GC",
+    "VAD",
+    "THU",
+    "SLO",
+    "FCS",
+    "AAR",
+    "WIN",
+    "WIL",
+    "SCK",
+    "XAM",
+    "YS")
+
+
+
+
+# Knoten-Attribut "league" definieren
+V(transfer_igraph)$league <- c(
+    "SL", "SL", "SL", "SL", "SL",
+    "SL", "SL", "SL", "SL", "SL",
+    "ChL", "ChL", "ChL", "ChL", "ChL",
+    "ChL", "ChL", "ChL", "ChL", "ChL"
+)
+
+
+
+#E(transfer_igraph)$type <- type
+#transfer_igraph <- set.edge.attribute(graph = transfer_igraph, name = 'spendings', value = spendings) 
+V(transfer_igraph)
+summary(transfer_igraph)
+
+class(spendings)
+
+```
+
+
+```{r}
+
+spendings_trial <- (E(transfer_igraph)$spendings)
+typeof(spendings_trial)
+length(spendings_trial)
+
+x_num <- (E(transfer_igraph)$spendings)
+typeof(x_num)
+length(spendings_trial)
+
+
+par(mar=c(0,0,0,0), mfrow=c(1,1))
+plot(transfer_igraph, edge.arrow.size=.2, edge.color="orange",
+vertex.color="orange", vertex.frame.color="#ffffff",
+vertex.label=V(transfer_igraph)$names, vertex.label.color="black", edge.width = E(transfer_igraph)$spendings*0.5)
+
+
+```
+
+```{r}
+
+
+colrs <- c("gold", "tomato")
+V(transfer_igraph)$color <- colrs[V(transfer_igraph)$league]
+
+
+V(transfer_igraph)$color
+summary(transfer_igraph)
+
+deg <- degree(transfer_igraph,mode="all")
+V(transfer_igraph)$size <- deg*2
+
+E(transfer_igraph)$width <- is.numeric(E(transfer_igraph)$spendings)*0.5
+
+
+par(mar=c(0,0,0,0), mfrow=c(1,1))
+plot(transfer_igraph, mode="kamadakawai", edge. = E(transfer_igraph)$width)
+
+
+
+
+```
+
+
+
+
+
+Test if I can convert Rmd to R file with Knitr
+```{r convert markdown to R Script}
+
+#knitr::purl("Heimarbeit2.rmd")
+
+
+```
+
+ 
+
+
