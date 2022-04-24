@@ -142,7 +142,7 @@ gplot(transfer_net, vertex.col = league_pal[league_cat],
       %e% "spendings")*0.35,mode = "fruchtermanreingold",
       boxed.labels = TRUE,label.border = "white", label.pos = 0,
       label.bg = "white", label.col = league_pal[league_cat],
-      label.cex = 0.85, usearrows = FALSE)
+      label.cex = 0.85, usearrows = TRUE)
 legend("bottomleft", legend= c("Abloese", "Leihe", "unbekannt"),
        col=linecol_pal, lty = 1, lwd = 4 ,pt.cex = 1.5, bty = "o", title = "Transfer-Typ")
 legend("bottomright", legend= c("Challenge League", "Super League"),
