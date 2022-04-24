@@ -132,6 +132,7 @@ linecol_pal <- c("#e0209d","#fa9fb5","#ffc74f")
 league_pal = c("#aa36eec4", "#f353de")
 type_cat <- as.factor(get.edge.attribute(transfer_net,"type"))
 
+set.seed(7)
 gplot(transfer_net, vertex.col = league_pal[league_cat],
       displaylabels = TRUE,
       vertex.cex = sqrt(bet+1)/1.85,
@@ -143,7 +144,9 @@ gplot(transfer_net, vertex.col = league_pal[league_cat],
       label.bg = "white", label.col = league_pal[league_cat],
       label.cex = 0.85, usearrows = FALSE)
 legend("bottomleft", legend= c("Abloese", "Leihe", "unbekannt"),
-       col=linecol_pal, pch = 19, pt.cex = 1.5, bty = "n", title = "Transfer-Typ")
+       col=linecol_pal, lty = 1, lwd = 4 ,pt.cex = 1.5, bty = "o", title = "Transfer-Typ")
+legend("bottomright", legend= c("Challenge League", "Super League"),
+       col=league_pal, pch = 19, pt.cex = 1.5, bty = "o", title = "Liga")
 
 
 
