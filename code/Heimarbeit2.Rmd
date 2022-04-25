@@ -126,7 +126,7 @@ set.edge.attribute(transfer_net, "type", type)
 # Knoten-Attribut "alldeg" definieren (abgekürzte Variante)
 transfer_net %v% "alldeg" <- degree(transfer_net)
 
-summary(transfer_net)
+summary(transfer_net, print.adj = FALSE)
 
 
 ```
@@ -189,7 +189,7 @@ cls
 ### Knotenattribute
 
 Um ein Knotenattribute zu visualisieren, haben wir uns für die zwei verschiedenen Ligen entschieden, aus denen die Teams stammen, indem wir sie entsprechend ihrer Ligazugehörigkeit einfärben. Zusätzlich berechneten wir den Degree jedes Knotens, was sich dann in der Größe jedes Knotens widerspiegelte. Zudem haben wir mit gebogenen Pfeilen anstelle von geraden Pfeilen herumgespielt.  
-Interessant dabei war, dass der Degree als Knotenattribut nicht so signifikant zu sein schien, denn jeder Knoten hatte mindestens 3 Verbindungen, wobei der höchste Wert 7 war und der Mittelwert bei 4,6 lag.
+Interessant dabei war, dass der Degree als Knotenattribut nicht so signifikant zu sein schien, denn jeder Knoten hatte mindestens 3 Verbindungen,k wobei der höchste Wert 7 war und der Mittelwert bei 4,6 lag.
 
 
 
@@ -261,7 +261,7 @@ Die hohe Zahl der unbekannten Transaktionsarten und -summen lässt auch Raum fü
 
 ### Appendix: Gesamten R-Code für den Bericht
 
-```{r ref.label=knitr::all_labels(), echo=TRUE, eval=TRUE}
+```{r ref.label=knitr::all_labels(), echo=TRUE, eval=TRUE, tidy=TRUE, tidy.opts = list(blank = FALSE, width.cutoff = 60)}
 
 ```
 
