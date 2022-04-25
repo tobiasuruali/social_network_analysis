@@ -143,7 +143,7 @@ Um das richtige Layout zu wählen, haben wir 6 mögliche Modi visualisiert: Circ
 
 
 
-```{r first few plots, echo=FALSE , tidy=TRUE, tidy.opts = list(blank = FALSE, width.cutoff = 60)}
+```{r first few layout plots, echo=FALSE , tidy=TRUE, tidy.opts = list(blank = FALSE, width.cutoff = 60)}
 
 my_pal = c("#2ca25f","#de2d26")
 league_cat = as.factor(get.vertex.attribute(transfer_net,"league"))
@@ -188,8 +188,8 @@ cls
 
 ### Knotenattribute
 
-Um ein Knotenattribute zu visualisieren, haben wir uns für die zwei verschiedenen Ligen entschieden, aus denen die Teams stammen, indem wir sie entsprechend ihrer Ligazugehörigkeit einfärben. Zusätzlich berechneten wir den Grad jedes Knotens, was sich dann in der Größe jedes Knotens widerspiegelte. Zudem haben wir mit gebogenen Pfeilen anstelle von geraden Pfeilen herumgespielt.  
-Interessant dabei war, dass der Grad als Knotenattribut nicht so signifikant zu sein schien, denn jeder Knoten hatte mindestens 3 Verbindungen, wobei der höchste Wert 7 war und der Mittelwert bei 4,6 lag.
+Um ein Knotenattribute zu visualisieren, haben wir uns für die zwei verschiedenen Ligen entschieden, aus denen die Teams stammen, indem wir sie entsprechend ihrer Ligazugehörigkeit einfärben. Zusätzlich berechneten wir den Degree jedes Knotens, was sich dann in der Größe jedes Knotens widerspiegelte. Zudem haben wir mit gebogenen Pfeilen anstelle von geraden Pfeilen herumgespielt.  
+Interessant dabei war, dass der Degree als Knotenattribut nicht so signifikant zu sein schien, denn jeder Knoten hatte mindestens 3 Verbindungen, wobei der höchste Wert 7 war und der Mittelwert bei 4,6 lag.
 
 
 
