@@ -1,0 +1,219 @@
+---
+  title: "Hausarbeit3"
+output: pdf_document
+---
+  1. Netzwerk erstellen
+```{r}
+## ----set up of packages, include=FALSE--------------------------------------------------------------------------------------------------------
+# install.packages("statnet")
+library("RColorBrewer")
+library("statnet")
+library("scales")
+library("formatR")
+
+
+## ----set up of edge list , tidy=TRUE----------------------------------------------------------------------------------------------------------
+edge_list <- read.csv("/Users/julienlattmann/Desktop/Edge List Values.csv", sep = ";")
+
+# Ertsellen der Kanten-Liste aufgrund der gesammelten Daten
+netmat2 <- edge_list
+
+# Netzwerk-Objekt erstellen
+transfer_net <- network(netmat2, matrix.type = "edgelist", directed = TRUE)
+
+# Knoten Acronyms 
+network.vertex.names(transfer_net) <- 
+  c(
+    "YB",
+    "BAS",
+    "SFC",
+    "LUG",
+    "LUZ",
+    "LS",
+    "SG",
+    "FCZ",
+    "SION",
+    "GC",
+    "VAD",
+    "THU",
+    "SLO",
+    "FCS",
+    "AAR",
+    "WIN",
+    "WIL",
+    "SCK",
+    "XAM",
+    "YS")
+
+
+
+
+# Knoten-Attribut "league" definieren
+set.vertex.attribute(transfer_net, "league", c(
+  "SL", "SL", "SL", "SL", "SL",
+  "SL", "SL", "SL", "SL", "SL",
+  "ChL", "ChL", "ChL", "ChL", "ChL",
+  "ChL", "ChL", "ChL", "ChL", "ChL"
+))
+
+#Kanten-Attribut "spendings" definieren: Transfersumme in Tsd.
+spendings <- read.csv("/Users/julienlattmann/Desktop/Spendings.csv", sep = ";")
+set.edge.attribute(transfer_net, "spendings", spendings)
+
+#Kanten-Attribut "type" definieren: Spieler-Transaktionstyp (Ablöse, Leihe, unbekannt)
+type <- read.csv("/Users/julienlattmann/Desktop/Types_ID.csv", sep = ";")
+set.edge.attribute(transfer_net, "type", type)
+
+
+# Knoten-Attribut "alldeg" definieren (abgekürzte Variante)
+transfer_net %v% "alldeg" <- degree(transfer_net)
+
+summary(transfer_net)
+```
+
+
+2. Masszahlen
+```{r}
+########## Start Hausarbeit 3 ########## 
+
+#Grösse des Netzwerkes berechnen
+Grösse <- network.size(transfer_net)
+Grösse
+
+#Dichte des Netzwerkes berechnen
+Dichte <- gden(transfer_net)
+Dichte
+# oder von Hand --> m/(n(n-1))
+Dichte_H <- 92/(20*(20-1))
+Dichte_H
+
+#Komponenten des Netzwerkes berechnen
+Komp <- components(transfer_net)
+Komp
+
+#Durchmesser des Netzwerkes berechnen
+Dm <- geodist(transfer_net)
+Dm_max <- max(Dm$gdist)
+Dm_max
+
+#Clustering Coefficient des Netzwerkes berechnen
+Clust <- gtrans(transfer_net)
+Clust
+```
+
+3. Zentralitäts-Masse
+```{r}
+#Betweenness
+bet <-betweenness(transfer_net, gmode = "graph")
+bet
+#Degree
+deg <-degree(transfer_net, gmode = "graph")
+deg
+#Closeness
+cls <-closeness(transfer_net, gmode = "graph")
+cls
+```
+
+4. Visualisierung mit Knotenattributen
+```{r}
+par(mfrow=c(1,3))
+linecol_pal <- c("#e0209d","#fa9fb5","#ffc74f")
+league_pal = c("#aa36eec4", "#f353de")
+type_cat <- as.factor(get.edge.attribute(transfer_net,"type"))
+league_cat = as.factor(get.vertex.attribute(transfer_net,"league"))
+
+#Using Betweenness as vertex size
+set.seed(7)
+gplot(transfer_net, vertex.col = league_pal[league_cat],
+      displaylabels = FALSE,
+      vertex.cex = sqrt(bet),
+      vertex.border = "white",
+      edge.col= linecol_pal[transfer_net %e% 'type'],
+      edge.lwd = sqrt(transfer_net 
+                      %e% "spendings")*0.35,mode = "fruchtermanreingold",
+      boxed.labels = TRUE,label.border = "white", label.pos = 0,
+      label.bg = "white", label.col = league_pal[league_cat],
+      label.cex = 0.85, usearrows = TRUE, main = "Betweenness")
+
+#Using Closness as vertex size
+set.seed(7)
+gplot(transfer_net, vertex.col = league_pal[league_cat],
+      displaylabels = FALSE,
+      vertex.cex = sqrt(cls),
+      vertex.border = "white",
+      edge.col= linecol_pal[transfer_net %e% 'type'],
+      edge.lwd = sqrt(transfer_net 
+                      %e% "spendings")*0.35,mode = "fruchtermanreingold",
+      boxed.labels = TRUE,label.border = "white", label.pos = 0,
+      label.bg = "white", label.col = league_pal[league_cat],
+      label.cex = 0.85, usearrows = TRUE, main = "Closeness")
+
+#Using Degree as vertex size
+set.seed(7)
+gplot(transfer_net, vertex.col = league_pal[league_cat],
+      displaylabels = FALSE,
+      vertex.cex = sqrt(deg),
+      vertex.border = "white",
+      edge.col= linecol_pal[transfer_net %e% 'type'],
+      edge.lwd = sqrt(transfer_net 
+                      %e% "spendings")*0.35,mode = "fruchtermanreingold",
+      boxed.labels = TRUE,label.border = "white", label.pos = 0,
+      label.bg = "white", label.col = league_pal[league_cat],
+      label.cex = 0.85, usearrows = TRUE, main = "Degree")
+
+```
+
+
+5. Brücken und Cutpoints
+```{r}
+#Cutpoints identifizieren (weak component rule for directed networks)
+cps <- cutpoints(transfer_net, connected = "weak")
+cps
+
+#Brücken identifizieren
+bridges <- function(dat,mode="graph",
+                    connected=c("strong", "weak")){
+  e_cnt <- network.edgecount(dat)
+  if (mode == "graph") {
+    cmp_cnt <- components(dat)
+    b_vec <- rep(FALSE,e_cnt)
+    for(i in 1:e_cnt){
+      dat2 <- dat
+      delete.edges(dat2,i)
+      b_vec[i] <- (components(dat2) != cmp_cnt)
+    }
+  }
+  
+  else {
+    cmp_cnt <- components(dat,connected=connected)
+    b_vec <- rep(FALSE,e_cnt)
+    for(i in 1:e_cnt){
+      dat2 <- dat
+      delete.edges(dat2,i)
+      b_vec[i] <- (components(dat2,connected=connected)
+                   != cmp_cnt)
+    }
+  }
+  return(b_vec)
+}
+
+bridges(transfer_net)
+
+brnet <- bridges(transfer_net)
+#Welche Edges sind Brücken?
+which(brnet==TRUE)
+
+par(mar=c(1,0,1,0), mfrow=c(1,1))
+net2 <- transfer_net
+components(net2)
+
+delete.edges(net2,c(39,92))
+components(net2)
+
+gplot(transfer_net,gmode="graph",vertex.col="red",
+      edge.col=brnet+2,
+      jitter=FALSE,displaylabels=TRUE)
+
+```
+
+6. Zentrale Aussagen
