@@ -210,9 +210,20 @@ components(net2)
 delete.edges(net2,c(39,92))
 components(net2)
 
-gplot(transfer_net,gmode="graph",vertex.col="red",
+gplot(net2,gmode="graph",vertex.col="red",
       edge.col=brnet+2,
       jitter=FALSE,displaylabels=TRUE)
+
+#Cutpoints und Brücken für den Subgraphen der Super League
+net_SL <- delete.vertices(transfer_net, 11:20)
+gplot(net_SL, displaylabels=TRUE)
+cutpoints(net_SL, connected = "weak")
+brnet_SL <- bridges(net_SL)
+which(brnet_SL==TRUE)
+
+net_SL2 <- delete.vertices(net_SL, 2)
+components(net_SL2)
+gplot(net_SL2, displaylabels = TRUE)
 
 ```
 
