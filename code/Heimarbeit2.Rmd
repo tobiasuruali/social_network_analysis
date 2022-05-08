@@ -253,7 +253,7 @@ Die hohe Zahl der unbekannten Transaktionsarten und -summen lässt auch Raum fü
 
 ```{r convert markdown to R Script, echo=FALSE}
 
-#knitr::purl("Heimarbeit2.rmd")
+# knitr::purl("Heimarbeit2.rmd")
 
 
 ```
