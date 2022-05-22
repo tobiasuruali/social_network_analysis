@@ -224,6 +224,20 @@ plot.igraph(graph, vertex.color=V(graph)$blocks, arrow.mode =0) # plot in igraph
 
 
 
+```{r}
+
+cw <- cluster_walktrap(graph)
+membership(cw)
+
+modularity(cw)
+
+plot(cw, graph)
+
+
+```
+
+
+
 
 ```{r, include=FALSE}
 ########## Start Hausarbeit 3 ########## 
