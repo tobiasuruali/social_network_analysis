@@ -47,17 +47,15 @@ Für das Clustering (Abbildung 2) haben wir uns für drei verschiedene Methoden 
 Edge-Betweeness und Infomap Clustering zeigten leider einen niedrigen Modularitätswert (zwischen 1,11 - 1,13), was uns zeigt, dass die Algorithmen nicht zuversichtlich waren, Untergruppenstrukturen in unserem Netzwerk zu finden. Die Modularität zeigt also, dass unser Netzwerk keine einzelnen besonders dichten Verbindungen zwischen den Knoten aufweist.
 Interessant ist, dass das Clustering, das auf den ersten Blick die "deutlichste" Unterscheidbarkeit von Clustern darstellt (Walktrap), den niedrigsten Modularitätswert (0,06) aufweist.
 
-Ausserdem haben wir ein wenig Modellierung betrieben.
+Zusätzlich haben wir Modellierung (Abbildung 3) auf dem Netzwerk betrieben.
 Die Modellierung ist nützlich bei der Analyse von Netzwerkmodellen und dient als Grundlage für den Vergleich empirischer sozialer Netzwerke und als Bausteine für komplexe Netzwerksimulationen [@Luke].
-Wir führten die Simulation von 3 verschiedenen Modellen mit der gleichen Netzwerkgrösse durch.
-Interessant dabei war, dass die Modelle in beiden Spektren gebaut wurden, das Erdos-Renyi-Modell erzeugte ein etwas dichteres Modell als unser eigenes. Noch beeindruckender war jedoch, dass das Barbasi Game Model im Vergleich zu unserem ursprünglichen Modell eine sehr geringe Dichte (0.1 im Vergleich zu 0.45) aufwies. Das Modell erzeugte sogar Isolates und Komponenten.
+Wir führten die Simulation von 3 verschiedenen Modellen mit der gleichen Netzwerkgrösse durch.Interessant dabei war, dass die Modelle in beiden Spektren gebaut wurden, das Erdos-Renyi-Modell erzeugte ein etwas dichteres Modell als unser eigenes. Noch beeindruckender war jedoch, dass das Barbasi Game Model im Vergleich zu unserem ursprünglichen Modell eine sehr geringe Dichte (0.1 im Vergleich zu 0.45) aufwies. Das Modell erzeugte sogar Isolates und Komponenten.
 
 Als literarische Referenz haben wir uns auf Ali Sevilmis Papier bezogen, das die Transfers in der türkischen Liga untersucht [@Ali]. 
+In seiner Untersuchung kam er zu dem Schluss, dass es eine beträchtliche Anzahl von Transfers zwischen anatolischen Mannschaften gab, einige sogar mit ähnlicher Vereinskultur. Solche kulturgeschichtlichen Entdeckungen und weitere Forschungen wären für die Umsetzung in unserem Netzwerk sehr interessant gewesen. Aufgrund der Dichte des Transfernetzes 2021/22 war es schwierig, irgendwelche " Communities " zu identifizieren. Weitere Forschungen zur Kumulierung von Transfertransaktionen der vergangenen Jahre könnten wiederum zur Entdeckung kultureller oder freundschaftlicher Bindungen zwischen Vereinen führen, die wir noch nicht entdecken konnten.
 
 
-
-
-Anzahl Wörter: 668
+Anzahl Wörter: 685
 
 ```{r creating Network (network package), include=FALSE}
 ## ----set up of packages, include=FALSE--------------------------------------------------------------------------------------------------------
