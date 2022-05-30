@@ -14,7 +14,11 @@ zwischen allen Teams aus den beiden höchsten Fussballigen der Schweiz in der Sa
 2021/22 dar. Die Knoten stellen die 20 Mannschaften dar (je 10 pro Liga), während
 die Kanten jeweils einen Transfer, also einen Spieler, welcher von einem Team zu
 einem anderen gewechselt ist, verkörpern. Weil die Richtung des Wechsels bestimmt
-ist, handelt es sich um ein gerichtetes Netzwerk.
+ist, handelt es sich um ein gerichtetes Netzwerk. In unseren bisherigen Arbeiten hat 
+sich bereits ergeben, dass das Transfernetzwerk der beiden höchsten Schweizer Fussballigen 
+ein durchaus dichtes Gefüge ist, in welchem zwischen verschiedensten Teams Spieler 
+ausgetauscht werden. Dadurch wurde nahegelegt, wie wichtig die Teams der heimischen 
+Ligen als Partner für die Kaderplanung sein können.
 
 Unsere Hauptvisualisierung (Abbildung 1) gibt im Grunde alle Informationen über unser Netzwerk auf einen Blick wieder. Die Kanten unterscheiden sich farblich durch den Transfertyp und ihre Grösse repräsentiert die Transaktionssumme.
 Das Netzwerk hat erwartungsgemäss eine Grösse von 20, was auch der Anzahl der Knotenpunkte entspricht. Die Knoten unterscheiden sich farblich zwischen den beiden Schweizer Ligen und die Grösse repräsentiert zusätzlich den Stellenwert des einzelnen Knotens im Netzwerk, gemäss Betweeness.
@@ -55,7 +59,7 @@ Als literarische Referenz haben wir uns auf Ali Sevilmis Papier bezogen, das die
 In seiner Untersuchung kam er zu dem Schluss, dass es eine beträchtliche Anzahl von Transfers zwischen anatolischen Mannschaften gab, einige sogar mit ähnlicher Vereinskultur. Solche kulturgeschichtlichen Entdeckungen und weitere Forschungen wären für die Umsetzung in unserem Netzwerk sehr interessant gewesen. Aufgrund der Dichte des Transfernetzes 2021/22 war es schwierig, irgendwelche " Communities " zu identifizieren. Weitere Forschungen zur Kumulierung von Transfertransaktionen der vergangenen Jahre könnten wiederum zur Entdeckung kultureller oder freundschaftlicher Bindungen zwischen Vereinen führen, die wir noch nicht entdecken konnten.
 
 
-Anzahl Wörter: 685
+Anzahl Wörter: 733
 
 ```{r creating Network (network package), include=FALSE}
 ## ----set up of packages, include=FALSE--------------------------------------------------------------------------------------------------------
