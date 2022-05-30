@@ -11,25 +11,13 @@ link-citations: true
 ---
 Wie bereits bei der letzten Arbeit beschrieben stellt unser Netzwerk die Transfers
 zwischen allen Teams aus den beiden höchsten Fussballigen der Schweiz in der Saison
-2021/22 dar. 
-Die Grösse des Netzwerks beträgt nicht überraschend 20, was der Anzahl der Knoten
-entspricht. Eine grössere Aussagekraft zur Beschreibung des Netzwerkes hat der 
-Wert für die Dichte, welcher 0.242 beträgt und somit auf eine ziemlich hohe 
-Dichte hinweist, welche sich auch beim Betrachten des Graphen widerspiegelt. Die
-hohe Dichte geht ausserdem darauf zurück, dass viele von allen möglichen 
-Interaktionen zwischen den Teams ausgeschöpft werden. Passend zu diesem Ergebnis
-besteht das Netzwerk nur aus einer einzigen Komponente, womit alle Knoten über
-gewisse Pfade miteinander verbunden sind. Dies zeigt sich gewissermassen auch im
-Durchmesser des Netzwerkes, welcher 5 beträgt und die Länge des kürzesten Pfades
-zwischen den beiden am weitesten von einander entfernten Knoten ausdrückt. Anders
-ausgedrückt: Bei einer Netzwerkgrösse von 20 scheint ein Durchmesser von 5 eher 
-klein zu sein, was widerum für ein dichtes Netzwerk spricht. Mit 0.176 fällt 
-zuletzt der Clustering-Koeffizient nicht allzu hoch aus. Dies kommt wohl daher,
-dass im Graphen nicht allzu viele "Dreicke" vorhanden sind. Die Masszahlen drücken 
-schliesslich aus, dass es sich beim vorliegenden Netzwerk um ein (äusserst) Dichtes 
-Gebilde handelt.
+2021/22 dar. Die Knoten stellen die 20 Mannschaften dar (je 10 pro Liga), während
+die Kanten jeweils einen Transfer, also einen Spieler, welcher von einem Team zu
+einem anderen gewechselt ist, verkörpern. Weil die Richtung des Wechsels bestimmt
+ist, handelt es sich um ein gerichtetes Netzwerk.
 
-
+Unsere Hauptvisualisierung (Abbildung 1) gibt im Grunde alle Informationen über unser Netzwerk auf einen Blick wieder. Die Kanten unterscheiden sich farblich durch den Transfertyp und ihre Grösse repräsentiert die Transaktionssumme.
+Das Netzwerk hat erwartungsgemäss eine Grösse von 20, was auch der Anzahl der Knotenpunkte entspricht. Die Knoten unterscheiden sich farblich zwischen den beiden Schweizer Ligen und die Grösse repräsentiert zusätzlich den Stellenwert des einzelnen Knotens im Netzwerk, gemäss Betweeness.
 Bei der Betrachtung der verschiedenen Zentralitäts-Masse offenbaren sich einige
 Unterschiede bezüglich der Varianz der Zentralität zwischen den Knoten.
 Bei der degree-basierten Zentralisierung variieren die Werte für alle Knoten in 
@@ -55,30 +43,19 @@ als Indikator für die Unabhängiigkeit bzw. Effizienz der Knoten, welche somit
 bei allen Teams hoch sein dürfte.
 
 
-Einserseits sagen somit alle verschiedenen Zentralisierungs-Masse aus, dass im 
-vorliegenden Netzwerk nicht allzu grosse Unterschiede bezüglich der zentralen
-Positionierung der Knoten vorliegen und somit kaum "periphere" Akteure vorhanden
-sind. Der Vergleich der verschiedenen Zentralitätsmasse in der Visualisierung (vgl. Abbildung 1)
-zeigt wie bereits oben beschrieben, dass allgmein eher hohe Zentralität vorliegt. Vor
-allem bei der Betweenness-Zentralität zeigt sich, dass Knoten, welche auch optisch 
-am zentralsten im Netzwerk liegen, ebenfalls grösser dargestellt werden. Diese 
-Knoten dürften somit eine wichtige Stellung für das Transfergeschehen in den 
-beiden Ligen haben. \newpage
+Für das Clustering (Abbildung 2) haben wir uns für drei verschiedene Methoden entschieden, um bestimmte "Communities" in unserem Netzwerk zu bestimmen. Die von uns gewählten Methoden waren "Walktrap, Edge-Betweeness und Infomap". Die Entscheidung für die beiden letztgenannten Methoden war darauf zurückzuführen, dass sie die einzigen waren, die gerichtete Netzwerke unterstützen. 
+Edge-Betweeness und Infomap Clustering zeigten leider einen niedrigen Modularitätswert (zwischen 1,11 - 1,13), was uns zeigt, dass die Algorithmen nicht zuversichtlich waren, Untergruppenstrukturen in unserem Netzwerk zu finden. Die Modularität zeigt also, dass unser Netzwerk keine einzelnen besonders dichten Verbindungen zwischen den Knoten aufweist.
+Interessant ist, dass das Clustering, das auf den ersten Blick die "deutlichste" Unterscheidbarkeit von Clustern darstellt (Walktrap), den niedrigsten Modularitätswert (0,06) aufweist.
+
+Ausserdem haben wir ein wenig Modellierung betrieben.
+Die Modellierung ist nützlich bei der Analyse von Netzwerkmodellen und dient als Grundlage für den Vergleich empirischer sozialer Netzwerke und als Bausteine für komplexe Netzwerksimulationen [@Luke].
+Wir führten die Simulation von 3 verschiedenen Modellen mit der gleichen Netzwerkgrösse durch.
+Interessant dabei war, dass die Modelle in beiden Spektren gebaut wurden, das Erdos-Renyi-Modell erzeugte ein etwas dichteres Modell als unser eigenes. Noch beeindruckender war jedoch, dass das Barbasi Game Model im Vergleich zu unserem ursprünglichen Modell eine sehr geringe Dichte (0.1 im Vergleich zu 0.45) aufwies. Das Modell erzeugte sogar Isolates und Komponenten.
+
+Als literarische Referenz haben wir uns auf Ali Sevilmis Papier bezogen, das die Transfers in der türkischen Liga untersucht [@Ali]. 
 
 
-Da es sich um ein sehr zentrales Netzwerk handelt, lassen sich darin weder 
-Brücken noch Cutpoints finden. Schaut man sich aber bspw. nur die Super League
-isoliert an (vgl. Abbildung 2), offenbaren sich der FC Basel und der FC Luzern als Cutpoints. 
-Schliesst man die beiden Teams also aus dem Netzwerk aus, bilden sich mehrere 
-Komponenten für die Liga. Dies kann bspw. so interpretiert werden, dass Teams
-aus der Challenge League für das gesamte Transfergeschehen wichtige "Brücken" 
-bilden, welche schliesslich den Spieleraustausch zwsischen Teams in der Super
-League begünstigen. Als zentrale Aussage lässt sich aus den empirischen 
-Gegebenheiten ableiten, dass das Transfernetzwerk der beiden höchsten Schweizer 
-Fussballigen ein sehr dichtes Gefüge ist, in welchem zwischen verschiedensten 
-Teams Spieler ausgetauscht werden und die meisten Teams ebenfalls eine durchaus 
-hohe Zentralität im Netzwerk aufweisen. Dadurch wird aufgezeigt, wie wichtig die 
-Teams der heimischen Ligen als Partner für die Kaderplanung sein können.
+
 
 Anzahl Wörter: 668
 
@@ -89,7 +66,12 @@ library("RColorBrewer")
 library("statnet")
 library("scales")
 library("formatR")
-library(network)
+
+library("knitr")
+library("readxl")
+library("tidyr")
+library("kableExtra")
+library("dplyr")
 
 
 ## ----set up of edge list , tidy=TRUE----------------------------------------------------------------------------------------------------------
@@ -157,7 +139,7 @@ class(transfer_net)
 ```
 
 
-```{r Finale Visualisierung}
+```{r Finale Visualisierung , include=FALSE}
 
 bet <-sna::betweenness(transfer_net, gmode = "graph")
 summary(bet)
@@ -203,7 +185,7 @@ legend("bottomright", legend= c("Challenge League", "Super League"),
 
 
 
-```{r creating Igraph object}
+```{r creating Igraph object , include=FALSE}
 
 library(igraph)
 # detach(package:statnet, unload = TRUE)
@@ -211,8 +193,7 @@ library(igraph)
 
 edge_list <- read.csv("data/Edge_List_Values.csv", sep = ";")
 class(edge_list)
-graph <- graph_from_data_frame(edge_list, directed=TRUE, vertices = )
-?graph.data.frame
+graph <- graph_from_data_frame(edge_list, directed=FALSE, vertices = )
 
 
 
@@ -265,70 +246,55 @@ graph
 ```
 
 
-```{r structural Equivalence}
-
-library(concoR)
-
-mat <- as.matrix(get.adjacency(graph))
-
-m0 <- cor(mat) # Calculate a correlation matrix
-round(m0, 2) 
 
 
-blks <- concor_hca(list(mat), p = 2) 
-blks
-
-blk_mod <- blockmodel(transfer_net, blks$block) 
-blk_mod
-
-?plot
-
-plot(blk_mod)
-
-diameter(graph)
-
-graph
-
-
-
-V(graph)$blocks <- blks$block
-
-
-
-
-?plot.igraph
-
-plot.igraph(graph, vertex.color=V(graph)$blocks, arrow.mode =0) # plot in igraph
-
-
-```
-
-
-
-
-
-```{r Clustering}
+```{r Clustering , include=FALSE}
 
 cw <- cluster_walktrap(graph)
 membership(cw)
-
 modularity(cw)
+ceb <- cluster_edge_betweenness(graph)
+membership(ceb)
+modularity(ceb)
+imap <- cluster_infomap(graph)
+membership(imap)
+modularity(imap)
 
-plot(graph,mark.groups = cw, vertex.label = NA, vertex_col = "red")
-# rglplot(graph)
+
+graph_pal <- c("#FF5733", "#f353de")
+V(graph)$color <- graph_pal[V(graph)$league]
+
+# plot(graph, vertex.label=V(graph)$name)
+
+
+
+set.seed(40)
+
+par(mar= c(2,0,2,0),mfrow=c(1,3))
+plot(graph,vertex.label = V(graph)$names,mark.groups = cw,mark.col = c("#E4ADFC", "#76FFCB"), vertex.label = NA, vertex.color = V(graph)$color, edge.color = "#34E7C4", edge.width = 2, vertex.label.color = "#3445E7",
+     vertex.frame.color="#ffffff", edge.curved = FALSE, main = "Walktrap")
+plot(graph,vertex.label = V(graph)$names,mark.groups = ceb, vertex.label = NA, vertex.color = V(graph)$color, edge.color = "#34E7C4", edge.width = 2, vertex.label.color = "#3445E7",
+     vertex.frame.color="#ffffff", edge.curved = FALSE, main = "CEB")
+plot(graph,vertex.label = V(graph)$names,mark.groups = imap, vertex.label = NA, vertex.color = V(graph)$color, edge.color = "#34E7C4", edge.width = 2, vertex.label.color = "#3445E7",
+     vertex.frame.color="#ffffff", edge.curved = FALSE, main = "Imap")
 
 
 ```
 
 
 
-```{r Modelling}
+```{r Modelling , include=FALSE}
+library(ggplot2)
 
 graph
 
 graph.density(graph)
-mean(igraph::degree(graph))
+transfer_degree <- mean(igraph::degree(graph))
+transfer_degree
+transfer_density <- graph.density(graph)
+transfer_density
 
+original_graph <- c("transfer_network", transfer_density, transfer_degree)
 
 g_rnd <- erdos.renyi.game(20,0.484,type='gnp')
 g_smwrld <- watts.strogatz.game(dim=1,size=20,
@@ -336,19 +302,44 @@ nei=2,p=.25)
 g_prfatt <- barabasi.game(20,out.dist=c(.15,.6,.25),
 directed=FALSE,zero.appeal=2)
 
-set.seed(23)
+set.seed(123)
 par(mar= c(2,0,2,0),mfrow=c(1,3))
-plot(g_rnd)
-plot(g_smwrld)
-plot(g_prfatt)
+plot(g_rnd, edge.color = "#FFC300" , vertex.color = "#C70039", vertex.label.color = "white",vertex.label.cex = 1.25,vertex.frame.color = "white", vertex.size = 20,
+     edge.width = 2)
+plot(g_smwrld, edge.color = "#FFC300" , vertex.color = "#C70039", vertex.label.color = "white",vertex.label.cex = 1.25,vertex.frame.color = "white", vertex.size = 20,
+     edge.width = 2)
+plot(g_prfatt, edge.color = "#FFC300" , vertex.color = "#C70039", vertex.label.color = "white",vertex.label.cex = 1.25,vertex.frame.color = "white", vertex.size = 20,
+     edge.width = 2)
 
 par(mar= c(2,0,2,0),mfrow=c(1,3))
 plot(degree.distribution(g_rnd),xlab="Degree",
-ylab="Proportion")
+ylab="Proportion" , col = "red", pch=19)
 plot(degree.distribution(g_smwrld),
-xlab="Degree",ylab="Proportion")
+xlab="Degree",ylab="Proportion", col = "red", pch=19)
 plot(degree.distribution(g_prfatt),
-xlab="Degree",ylab="Proportion")
+xlab="Degree",ylab="Proportion", col = "red", pch=19)
+
+
+#Modellierungs Tabelle 
+model_keys <- function(graph, model){
+  name <-deparse(substitute(model))
+  density <- graph.density(model)
+  degree <- mean(degree(model))
+  
+  df <- data.frame(modelname = name, density = density, degree = degree)
+  
+  return (df)
+  
+}
+
+list_model_g_rnd <- model_keys(graph, g_rnd)
+list_model_g_smwrld <- model_keys(graph, g_smwrld)
+list_model_g_prfatt <- model_keys(graph, g_prfatt)
+list_all_models <- rbind(original_graph, list_model_g_rnd,list_model_g_smwrld, list_model_g_prfatt)
+
+kable(list_all_models,caption= "Modelling Networks", booktabs = T)  %>% kable_styling(latex_options = "HOLD_position")
+  
+graph.density(g_rnd) 
 
 
 
@@ -357,7 +348,7 @@ xlab="Degree",ylab="Proportion")
 
 
 
-```{r, include=FALSE}
+```{r, include=FALSE , include=FALSE}
 ########## Start Hausarbeit 3 ########## 
 
 #Grösse des Netzwerkes berechnen
